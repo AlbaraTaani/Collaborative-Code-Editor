@@ -1,0 +1,21 @@
+# Use the official Node.js image as a base image
+FROM node:18
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and yarn.lock to install dependencies
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN yarn install
+
+RUN yarn add --dev nodemon
+
+
+COPY src ./src
+COPY public ./public
+
+EXPOSE 3000
+
+CMD ["yarn", "start"]

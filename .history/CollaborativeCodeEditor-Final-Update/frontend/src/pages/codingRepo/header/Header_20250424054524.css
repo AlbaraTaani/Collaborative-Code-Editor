@@ -1,0 +1,35 @@
+.repos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: var(--header-bg);
+  }
+  
+  .logo-container .app-logo {
+    height: 40px;
+    cursor: pointer;
+  }
+  
+  .header-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .icon-btn {
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+  }
+  
+  .icon-btn:hover {
+    background: rgba(0,0,0,0.1);
+  }
+  
+  .theme-btn {
+    background: none;
+  }
+  

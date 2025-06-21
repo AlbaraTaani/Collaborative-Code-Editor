@@ -1,0 +1,98 @@
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.form-animation {
+    background: rgb(255 255 255 / 0%);
+    padding: 30px;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 388px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.form-repo-header {
+    margin-bottom: 26px;
+    font-size: 1.8rem;
+    color: #bdbdbd;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border: 5px solid #ffffff0f;
+    border-radius: 69px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    color: #ffffff;
+    background: center;
+}
+.form-input:focus {
+    border-color: #0e0e0e;
+    outline: none;
+}
+
+.form-action-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4e4e4e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-action-button:hover {
+    background-color: #4c504c;
+}
+
+.finish-button {
+    background-color: #636363;
+}
+
+.finish-button:hover {
+    background-color: #7a7a7a;
+}
+
+.member-forms {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-action-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #00000000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+.finish-button {
+    background-color: #636363;
+    margin-top: 10px;
+}
+.add-member-headerForm {
+    margin-bottom: 26px;
+    font-size: 1.8rem;
+    color: #bdbdbd;
+}

@@ -1,0 +1,95 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: collaborative-editor
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - mongo
+    networks:
+      - backend
+    environment:
+      - DOCKER_HOST=tcp://host.docker.internal:2375
+    volumes:
+      - ./editor/src:/editor/src
+      - ./editor/target:/editor/target
+      - "${USERPROFILE}/.m2:/root/.m2"
+
+  mysql:
+    image: mysql:8.0
+    container_name: collaborative-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - backend
+
+  mongo:
+    image: mongo
+    container_name: collaborative-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: devroot
+      MONGO_INITDB_ROOT_PASSWORD: devroot
+      MONGO_INITDB_DATABASE: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo_init:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+
+  mongo-express:
+    image: mongo-express
+    container_name: collaborative-mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: collaborative-mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+      ME_CONFIG_MONGODB_AUTH_USERNAME: devroot
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: devroot
+      ME_CONFIG_BASICAUTH_USERNAME: dev
+      ME_CONFIG_BASICAUTH_PASSWORD: dev
+    depends_on:
+      - mongo
+    ports:
+      - "8888:8081"
+    networks:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: collaborative-phpmyadmin
+    environment:
+      PMA_HOST: collaborative-mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8082:80"
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  mongo_data:
+    driver: local
